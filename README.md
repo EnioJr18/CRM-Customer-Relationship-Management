@@ -1,6 +1,6 @@
 # 🚀 Django Sales CRM
 
-Um sistema de Gestão de Relacionamento com o Cliente (CRM) desenvolvido para organizar leads, histórico de interações e pipeline de vendas.
+Um sistema de Gestão de Relacionamento com o Cliente (CRM), o projeto simula uma aplicação real para gestão de leads, permitindo cadastro, acompanhamento de histórico e análise de métricas.
 
 ![Status do Projeto](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)
 ![Python](https://img.shields.io/badge/Python-3.13%2B-blue)
@@ -13,24 +13,31 @@ Este projeto faz parte do meu portfólio de desenvolvimento Backend. O objetivo 
 
 O sistema permite que vendedores cadastrem potenciais clientes (Leads), registrem interações (ligações, emails) e movam o cliente através de um funil de vendas.
 
-## 🛠 Tecnologias Utilizadas
+## 🚀 Funcionalidades
 
-* **Backend:** Python 3, Django Framework
-* **Banco de Dados:** PostgreSQL (Hospedado na nuvem via **Neon Tech**)
-* **Gerenciamento de Dependências:** Pip / Virtualenv
-* **Variáveis de Ambiente:** Python-dotenv
-* **Driver de Banco:** Psycopg2
+### Gestão de Leads (CRUD Completo)
+- [x] **Dashboard:** Visão geral com métricas (Total de leads, distribuição por status e prioridade).
+- [x] **Cadastro:** Adição de novos clientes com validação de dados.
+- [x] **Listagem:** Tabela interativa com busca e filtros rápidos.
+- [x] **Detalhamento:** Página exclusiva por cliente mostrando dados cadastrais e linha do tempo.
+- [x] **Edição e Exclusão:** Atualização de dados e remoção segura com confirmação.
 
-## ⚙️ Arquitetura e Modelagem
+### Histórico e Interações
+- [x] **Timeline:** Registro de notas e conversas (interações) para cada cliente.
+- [x] **Histórico:** Visualização cronológica do relacionamento com o cliente.
 
-O projeto segue o padrão MVC (MVT no Django):
-* **Models:** Definição rigorosa de tipos de dados, chaves estrangeiras (`ForeignKey`) e integridade referencial.
-* **Views (Controller):** (Em desenvolvimento) Lógica de negócios e controle de fluxo.
-* **Templates (View):** (Em desenvolvimento) Interface do usuário.
+### Recursos Avançados
+- [x] **Autenticação:** Sistema de Login/Logout seguro (apenas usuários autenticados acessam o sistema).
+- [x] **Busca e Filtros:** Pesquisa por nome e filtros rápidos (Alta Prioridade, Sem Interação, Recentes).
+- [x] **Exportação de Dados:** Geração de relatórios em **CSV** (Leads e Interações) para análise externa.
+- [x] **Responsividade:** Interface adaptada para Desktop e Mobile usando Bootstrap 5.
 
-### Estrutura do Banco de Dados Principal
-* **Lead:** Armazena dados do cliente, status do funil (`choices`) e prioridade.
-* **Interaction:** Tabela relacionada (1:N) que mantém o histórico de contatos com cada cliente.
+## 🛠️ Tecnologias Utilizadas
+
+- **Backend:** Python 3, Django 5
+- **Banco de Dados:** PostgreSQL (Hospedado na Neon Tech)
+- **Frontend:** HTML5, CSS3, Bootstrap 5 (CDN)
+- **Versionamento:** Git & GitHub
 
 ## 🚀 Como rodar o projeto localmente
 
@@ -64,7 +71,9 @@ O projeto segue o padrão MVC (MVT no Django):
 4.  **Configure as Variáveis de Ambiente**
     Crie um arquivo `.env` na raiz do projeto e adicione a URL do seu banco de dados:
     ```env
-    DATABASE_URL=postgres://usuario:senha@host-neon.tech/neondb?sslmode=require #(Exemplo)
+    SECRET_KEY=sua_chave_secreta
+    DEBUG=True
+    DATABASE_URL=postgres://usuario:senha@host-neon.tech/neondb?sslmode=require ou sqlite
     ```
 
 5.  **Execute as Migrations**
@@ -82,21 +91,17 @@ O projeto segue o padrão MVC (MVT no Django):
     python manage.py runserver
     ```
 
-## 🔜 Próximos Passos (Roadmap)
-
-- [x] Configuração do Ambiente e Banco de Dados (Neon)
-- [x] Modelagem de Dados (Leads e Interações)
-- [x] Customização do Django Admin
-- [ ] Criação das Views (Dashboard e Listagem)
-- [ ] Implementação de Templates com Bootstrap/Tailwind
-- [ ] Exportação de Relatórios (CSV/PDF)
+8. **Acesse**
+```bash
+http://127.0.0.1:8000/
+```
 
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
-Desenvolvido por **Enio Jr** 💻
+Desenvolvido por **Enio Jr** para fins de estudo e portfólio 💻
 
 📧 Entre em contato: eniojr100@gmail.com <br>
 🔗 LinkedIn: https://www.linkedin.com/in/enioeduardojr/ <br>

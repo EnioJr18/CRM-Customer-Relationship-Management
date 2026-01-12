@@ -28,7 +28,7 @@ Você pode testar o sistema funcionando em tempo real clicando no link abaixo:
 
 | Dashboard | Detalhes do Lead |
 |-----------|------------------|
-| *Cole o link da sua imagem aqui* | *Cole o link da sua imagem aqui* |
+<img src="Dashboard (1).png" alt="Dashboard da página" width="140" height="110">  <img src="Todos_os_leads.png" alt="Todos os Leads" width="140" height="110">
 
 ---
 
@@ -134,10 +134,10 @@ http://127.0.0.1:8000/
 
 🗺️ Roadmap:
 
-[ ]**Cadastro e Gestão de Usuários**
-[ ]**Melhoria na UI Design**
-[ ]**Interatividade**
-[ ]**Reestruturação do Código (Clean Code)**
+[ ]**Cadastro e Gestão de Usuários** <br>
+[ ]**Melhoria na UI Design** <br>
+[ ]**Interatividade** <br>
+[ ]**Reestruturação do Código (Clean Code)** <br>
 
 ## 📄 Licença
 

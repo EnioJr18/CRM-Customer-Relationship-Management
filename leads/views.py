@@ -9,10 +9,10 @@ from django.contrib.auth.forms import UserCreationForm
 
 @login_required
 def dashboard(request):
-    total_leads = Lead.objects.count()
-    leads_por_status = Lead.objects.values('status').annotate(total=Count('status'))
-    leads_por_prioridade = Lead.objects.values('prioridade').annotate(total=Count('prioridade'))
-    interacoes_recentes = Interaction.objects.select_related('lead').order_by('-data_interacao')[:5]
+    total_leads = Lead.objects.filter(agente_responsavel=request.user).count()
+    leads_por_status = Lead.objects.filter(agente_responsavel=request.user).values('status').annotate(total=Count('status'))
+    leads_por_prioridade = Lead.objects.filter(agente_responsavel=request.user).values('prioridade').annotate(total=Count('prioridade'))
+    interacoes_recentes = Interaction.objects.filter(lead__agente_responsavel=request.user).select_related('lead').order_by('-data_interacao')[:5]
 
     contexto = {
         'total_leads': total_leads,
@@ -39,7 +39,7 @@ def lead_create(request):
 
 @login_required
 def lead_detail(request, pk):
-    lead = get_object_or_404(Lead, pk=pk)
+    lead = get_object_or_404(Lead, pk=pk, agente_responsavel=request.user)
     interacoes = Interaction.objects.filter(lead=lead).order_by('-data_interacao')
     if request.method == 'POST':
         form = InteractionForm(request.POST)
@@ -60,12 +60,12 @@ def lead_detail(request, pk):
 
 @login_required
 def lead_list(request):
-    leads = Lead.objects.all().order_by('-criado_em')
+    leads = Lead.objects.filter(agente_responsavel=request.user).order_by('-criado_em')
     return render(request, 'leads/lead_list.html', {'leads': leads})
 
 @login_required
 def lead_update(request, pk):
-    lead = get_object_or_404(Lead, pk=pk)
+    lead = get_object_or_404(Lead, pk=pk, agente_responsavel=request.user)
     form = LeadForm(request.POST or None, instance=lead)
     if form.is_valid():
         form.save()
@@ -75,7 +75,7 @@ def lead_update(request, pk):
 
 @login_required
 def lead_delete(request, pk):
-    lead = get_object_or_404(Lead, pk=pk)
+    lead = get_object_or_404(Lead, pk=pk, agente_responsavel=request.user)
     
     if request.method == 'POST':
         lead.delete()
@@ -85,7 +85,7 @@ def lead_delete(request, pk):
 
 @login_required
 def interaction_delete(request, pk):
-    interacao = get_object_or_404(Interaction, pk=pk)
+    interacao = get_object_or_404(Interaction, pk=pk, lead__agente_responsavel=request.user)
     lead_pk = interacao.lead.pk
     
     if request.method == 'POST':
@@ -96,7 +96,7 @@ def interaction_delete(request, pk):
 
 @login_required
 def interaction_update(request, pk):
-    interacao = get_object_or_404(Interaction, pk=pk)
+    interacao = get_object_or_404(Interaction, pk=pk, lead__agente_responsavel=request.user)
     form = InteractionForm(request.POST or None, instance=interacao)
     if form.is_valid():
         form.save()

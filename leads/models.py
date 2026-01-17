@@ -27,7 +27,7 @@ class Lead(models.Model):
     agente_responsavel = models.ForeignKey(
         User, 
         related_name='leads', 
-        on_delete=models.SET_NULL, 
+        on_delete=models.CASCADE, 
         null=True, 
         blank=True
     )

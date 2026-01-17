@@ -1,19 +1,42 @@
-# 🚀 CRM Portfolio - Sistema de Gestão de Clientes
+# 🚀 CRM.Pro - Sistema de Gestão de Clientes
 
-Um sistema de Gestão de Relacionamento com o Cliente (CRM), o projeto simula uma aplicação real para gestão de leads, permitindo cadastro, acompanhamento de histórico e análise de métricas.
+![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow?style=for-the-badge)
 
-![Status do Projeto](https://shields.io/badge/Status-Active-success?logo=checkmarx&style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.13%2B-blue)
-![Django](https://img.shields.io/badge/Django-5.x-green)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-336791)
-
-## 📋 Sobre o Projeto
-
-Um sistema completo de **CRM (Customer Relationship Management)** desenvolvido para gerenciar o ciclo de vida de clientes, desde a captação (Lead) até o relacionamento contínuo. O sistema permite que vendedores cadastrem potenciais clientes (Leads), registrem interações (ligações, emails) e movam o cliente através de um funil de vendas.
-
-Este projeto demonstra uma aplicação **Fullstack Python** robusta, saindo do ambiente de desenvolvimento local e indo para a produção na nuvem com banco de dados real.
+Um sistema de CRM (Customer Relationship Management) moderno e seguro, desenvolvido com **Django**. O projeto foca em oferecer uma interface elegante (Dark Mode) e isolamento de dados por usuário, funcionando como um SaaS (Software as a Service).
 
 ---
+
+## 📸 Screenshots
+<img width="540" height="510" alt="Image" src="https://github.com/user-attachments/assets/b3d6aac8-9bdb-4d24-a33a-8284ebed4fdf" /> 
+<img width="540" height="510" alt="Image" src="https://github.com/user-attachments/assets/8759207a-b8a4-4eba-ab84-5126790135f1" />
+
+
+## ✨ Funcionalidades Principais
+
+- **🔐 Autenticação Segura:** Sistema completo de Login, Cadastro e Recuperação de Senha.
+- **🛡️ Multi-Tenant (Isolamento de Dados):** Cada usuário vê apenas os seus próprios leads. Acesso cruzado é bloqueado.
+- **🌑 UI/UX Moderna:** Interface responsiva com tema **Dark/Cyberpunk**, Sidebar fixa e componentes Bootstrap customizados.
+- **📊 Dashboard Interativo:** Visão geral com KPIs (Total de Vendas, Novos Clientes, Pedidos do Dia).
+- **📝 Gestão de Leads (CRUD):**
+  - Cadastro detalhado (Nome, Contato, Status, Prioridade).
+  - Histórico de interações (Timeline de anotações).
+  - Edição e Exclusão segura.
+  - Busca e Filtros: Pesquisa por nome e filtros rápidos (Alta Prioridade, Recentes, Sem Interação).
+  - Listagem inteligente com **paginação** e indicadores visuais de status.
+- **⚙️ Perfil de Usuário:** Área para atualização de dados cadastrais.
+- **Exportação:** Geração de relatórios em **CSV** para Excel.
+- **Deploy:** Configurado com Gunicorn e WhiteNoise para alta performance de arquivos estáticos.
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Back-end e Core:** Python, Django Framework.
+- **Front-end:** HTML5, CSS3, Bootstrap 5 (com customização CSS via Variáveis).
+- **Banco de Dados:** SQLite (Desenvolvimento) / PostgreSQL (Planejado para Produção).
+- **Ícones:** Bootstrap Icons.
+- **DevOps & Deploy:** Render (Hospedagem), WhiteNoise (Gestão de arquivos estáticos) e Git & GitHub.
 
 ### 🌐 Demo Online
 Você pode testar o sistema funcionando em tempo real clicando no link abaixo:
@@ -21,56 +44,6 @@ Você pode testar o sistema funcionando em tempo real clicando no link abaixo:
 👉 **[Acessar CRM Online (Render)](https://gestor-de-relacionamento-crm.onrender.com)**
 
 *(Nota: Como o servidor é gratuito, pode levar alguns segundos para "acordar" no primeiro acesso).*
-
----
-
-## 📸 Screenshots
-
-<img width="540" height="510" alt="Image" src="https://github.com/user-attachments/assets/b3d6aac8-9bdb-4d24-a33a-8284ebed4fdf" /> 
-<img width="540" height="510" alt="Image" src="https://github.com/user-attachments/assets/8759207a-b8a4-4eba-ab84-5126790135f1" />
-
----
-
-## ⚡ Funcionalidades Principais
-
-### 1. Gestão de Leads (CRUD)
-- Cadastro completo de clientes com validação.
-- Listagem inteligente com **paginação** e indicadores visuais de status.
-- Edição e Exclusão segura (com confirmação).
-
-### 2. Ferramentas de Negócio
-- **Dashboard Gerencial:** Métricas em tempo real (Total de leads, distribuição por status e prioridade).
-- **Timeline de Interações:** Histórico cronológico de conversas e notas para cada cliente.
-- **Busca e Filtros:** Pesquisa por nome e filtros rápidos (Alta Prioridade, Recentes, Sem Interação).
-- **Exportação:** Geração de relatórios em **CSV** para Excel.
-
-### 3. Segurança e Infraestrutura
-- **Autenticação:** Sistema de Login/Logout (acesso restrito).
-- **Proteção:** CSRF Tokens e SQL Injection prevention (ORM Django).
-- **Deploy:** Configurado com Gunicorn e WhiteNoise para alta performance de arquivos estáticos.
-
----
-
-## 🛠️ Tech Stack
-
-**Backend & Core**
-- Python 3.11+
-- Django 5 (MVT Architecture)
-- Gunicorn (WSGI Server)
-
-**Banco de Dados**
-- PostgreSQL (Produção - Neon Tech)
-- SQLite (Desenvolvimento Local)
-
-**Frontend**
-- HTML5 / CSS3
-- Bootstrap 5 (Responsividade)
-- Django Template Engine
-
-**DevOps & Deploy**
-- Render (Hospedagem)
-- WhiteNoise (Gestão de arquivos estáticos)
-- Git & GitHub
 
 ---
 
@@ -113,10 +86,11 @@ Você pode testar o sistema funcionando em tempo real clicando no link abaixo:
 
 5.  **Execute as Migrations**
     ```bash
+    python manage.py makemigrations
     python manage.py migrate
     ```
 
-6.  **Crie um Superusuário (para acessar o Admin)**
+6.  **Crie um Superusuário (para acessar o Admin, opcional)**
     ```bash
     python manage.py createsuperuser
     ```
@@ -127,16 +101,16 @@ Você pode testar o sistema funcionando em tempo real clicando no link abaixo:
     ```
 
 8. **Acesse**
-```bash
 http://127.0.0.1:8000/
-```
+
 
 🗺️ Roadmap:
 
-[ ]**Cadastro e Gestão de Usuários** <br>
-[ ]**Melhoria na UI Design** <br>
-[ ]**Interatividade** <br>
-[ ]**Reestruturação do Código (Clean Code)** <br>
+* [ ] Visualização de Dados: Implementar gráficos com Chart.js.
+* [ ] Automação: Envio de e-mails automáticos para novos leads.7
+
+## 🤝 Contribuição
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
 
 ## 📄 Licença
 

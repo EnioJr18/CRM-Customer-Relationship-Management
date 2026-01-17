@@ -17,7 +17,7 @@
                 <div class="text-center mb-4">
                     <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" 
                          style="width: 80px; height: 80px; background-color: rgba(139, 92, 246, 0.2); color: #8b5cf6; font-size: 2rem; font-weight: bold;">
-                        {{ lead.nome|first }}{{ lead.sobrenome|first }}
+                        {{ lead.nome|first }}{{ lead.sobrenome|default:""|first }}
                     </div>
                     <h3 class="fw-bold text-white mb-0">{{ lead.nome }} {{ lead.sobrenome }}</h3>
                     <p class="text-secondary">{{ lead.email }}</p>

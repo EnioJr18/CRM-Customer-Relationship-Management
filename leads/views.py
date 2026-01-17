@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
 from .models import Lead, Interaction
-from .forms import LeadForm, InteractionForm
+from .forms import LeadForm, InteractionForm, UserProfileForm
 import csv
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 @login_required
 def dashboard(request):
@@ -192,3 +193,15 @@ def signup_view(request):
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+@login_required
+def profile_view(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Perfil atualizado com sucesso!")
+            return redirect('leads:profile')
+    else:
+        form = UserProfileForm(instance=request.user)
+    
+    return render(request, 'leads/profile.html', {'form': form})

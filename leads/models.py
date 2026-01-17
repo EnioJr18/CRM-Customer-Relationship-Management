@@ -18,6 +18,7 @@ class Lead(models.Model):
 
     
     nome = models.CharField(max_length=255, verbose_name='Nome do Cliente')
+    sobrenome = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField()
     telefone = models.CharField(max_length=20, blank=True, null=True)
 

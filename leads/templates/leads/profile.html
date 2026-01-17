@@ -1,0 +1,73 @@
+{% extends "leads/base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            
+            <h2 class="fw-bold text-white mb-4">Configurações da Conta</h2>
+
+            <div class="card-dashboard mb-4">
+                <h5 class="fw-bold text-white mb-4">Meus Dados</h5>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="text-secondary small fw-bold">Usuário</label>
+                        {{ form.username }}
+                        <small class="text-muted" style="font-size: 0.7rem;">Nome usado para login.</small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="text-secondary small fw-bold">Nome</label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="text-secondary small fw-bold">Sobrenome</label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-secondary small fw-bold">Email</label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn" style="background-color: var(--accent-color); color: white;">
+                            Salvar Alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-dashboard border border-danger bg-transparent">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-danger fw-bold mb-1">Zona de Perigo</h6>
+                        <p class="text-secondary small mb-0">Esta ação não pode ser desfeita.</p>
+                    </div>
+                    <button class="btn btn-outline-danger btn-sm" disabled title="Funcionalidade em desenvolvimento">
+                        Excluir Conta
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control {
+        background-color: var(--bg-body) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        color: white !important;
+    }
+    .form-control:focus {
+        border-color: var(--accent-color) !important;
+        box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.25) !important;
+    }
+</style>
+{% endblock %}

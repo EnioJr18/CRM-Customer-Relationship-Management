@@ -3,46 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}CRM Portfolio{% endblock %}</title>
+    <title>CRM Portfolio</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'leads:dashboard' %}">CRM Portfolio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'leads:lead_list' %}">Todos os Leads</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'leads:lead_create' %}" class="btn btn-primary">+ Novo Lead</a>
-                    </li>
-                    <ul class="navbar-nav ms-auto">
-                        {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <span class="nav-link text-white">Olá, {{ user.username }}</span>
-                            </li>
-                            <li class="nav-item">
-                                <form action="{% url 'logout' %}" method="post" class="d-inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="nav-link btn btn-link text-white" style="text-decoration: none;">Sair</button>
-                                </form>
-                            </li>
-                        {% endif %}
+    <style>
+        :root {
+            /* Paleta de Cores: Dark Blue & Purple Theme */
+            --bg-body: #0f172a;        /* Fundo bem escuro (quase preto azulado) */
+            --bg-sidebar: #1e293b;     /* Sidebar um pouco mais clara */
+            --bg-card: #1e293b;        /* Fundo dos cards */
+            --text-primary: #f8fafc;   /* Texto branco */
+            --text-secondary: #94a3b8; /* Texto cinza claro */
+            --accent-color: #8b5cf6;   /* Roxo Neon */
+            --accent-hover: #7c3aed;   /* Roxo mais escuro para hover */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif; /* Fonte mais moderna se possível */
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+        width: 260px;
+        height: 100vh; /* Altura total da tela */
+        position: fixed; /* Fixa na tela */
+        top: 0;
+        left: 0;
+        background: var(--bg-sidebar);
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        z-index: 1000; /* Garante que fique por cima se precisar */
+        overflow-y: auto; /* Se o menu for muito grande, ele rola dentro da barra */
+        }
+        
+        .sidebar a {
+        color: var(--text-secondary);
+        border-radius: 10px;
+        margin: 5px 15px;
+        padding: 12px 15px;
+        font-size: 0.95rem;
+        text-decoration: none; /* Remove sublinhado padrão */
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background: rgba(139, 92, 246, 0.15); /* Fundo roxo transparente */
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .sidebar i { font-size: 1.1rem; }
+
+        /* --- Cards (Estilo da Imagem) --- */
+        .card-dashboard {
+            background-color: var(--bg-card);
+            border-radius: 16px; /* Bordas bem arredondadas igual à imagem */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-dashboard:hover {
+            transform: translateY(-5px); /* Efeito de flutuar ao passar o mouse */
+            border-color: var(--accent-color); /* Borda fica roxa */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            display: block;
+        }
+
+        .card-value {
+            font-size: 2rem; /* Valor bem grande igual na imagem */
+            font-weight: 700;
+            color: var(--accent-color); /* Valor em roxo */
+            margin-top: 15px;
+            margin-bottom: 0;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--text-secondary); /* Ícone discreto */
+        }
+
+        /* Conteúdo Principal */
+        .content {
+        margin-left: 260px; /* Empurra o conteúdo para não ficar atrás da sidebar */
+        padding: 40px;
+        width: calc(100% - 260px); /* Ocupa o resto da largura */
+        min-height: 100vh;
+        }
+
+        /* Ajuste para telas pequenas (Responsividade Básica) */
+    @media (max-width: 768px) {
+        .sidebar {
+            display: none; /* Esconde sidebar em celular por enquanto (para simplificar) */
+        }
+        .content {
+            margin-left: 0;
+            width: 100%;
+        }
+        }
+        
+        /* Tabelas no modo dark */
+        .table-dark-custom {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .table-dark-custom th, .table-dark-custom td {
+            background-color: var(--bg-card);
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 15px 20px;
+        }
+        .table-dark-custom th {
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="d-flex">
+        
+        <div class="sidebar p-3">
+            <h3 class="text-white text-center mb-4">
+                <i class="bi bi-rocket-takeoff"></i> CRM<span class="text-primary">.Pro</span>
+            </h3>
+            
+            <hr class="text-secondary">
+
+            <ul class="nav flex-column mb-auto">
+                <li class="nav-item mb-2">
+                    <a href="{% url 'leads:dashboard' %}" class="{% if 'dashboard' in request.path %}active{% endif %}">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{% url 'leads:lead_list' %}" class="{% if 'lead_list' in request.path or 'detalhes' in request.path %}active{% endif %}">
+                        <i class="bi bi-people-fill me-2"></i> Meus Leads
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="{% url 'leads:lead_create' %}" class="{% if 'criar' in request.path %}active{% endif %}">
+                        <i class="bi bi-person-plus-fill me-2"></i> Novo Lead
+                    </a>
+                </li>
+            </ul>
+
+            <hr class="text-secondary">
+
+            <div class="dropdown">
+                {% if user.is_authenticated %}
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                            {{ user.username|first|upper }}
+                        </div>
+                        <strong>{{ user.username }}</strong>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="{% url 'leads:profile' %}">Configurações</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">Sair</button>
+                            </form>
+                        </li>
                     </ul>
-                </ul>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary w-100">Entrar</a>
+                {% endif %}
             </div>
         </div>
-    </nav>
 
-    <div class="container">
-        {% block content %}
-        {% endblock %}
+        <div class="content">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

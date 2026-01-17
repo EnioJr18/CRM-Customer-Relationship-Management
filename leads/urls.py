@@ -16,6 +16,7 @@ urlpatterns = [
     # Interações
     path('interacao/<int:pk>/editar/', views.interaction_update, name='interaction_update'),
     path('interacao/<int:pk>/deletar/', views.interaction_delete, name='interaction_delete'),
+    path('configuracoes/', views.profile_view, name='profile'),
     
     # Busca e Filtros
     path('busca/', views.lead_search, name='lead_search'),

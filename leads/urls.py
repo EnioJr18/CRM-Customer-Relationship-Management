@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import dashboard, lead_detail, lead_list, lead_create, lead_update, lead_delete, interaction_delete
 from leads import views
+from . import views
 
 app_name = 'leads'
 
@@ -11,6 +12,7 @@ urlpatterns = [
     path('lista/', lead_list, name='lead_list'),
     path('<int:pk>/editar/', lead_update, name='lead_update'),
     path('<int:pk>/deletar/', lead_delete, name='lead_delete'),
+    path('cadastro/', views.signup_view, name='signup'),
     # Interações
     path('interacao/<int:pk>/editar/', views.interaction_update, name='interaction_update'),
     path('interacao/<int:pk>/deletar/', views.interaction_delete, name='interaction_delete'),

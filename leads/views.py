@@ -5,6 +5,7 @@ from .forms import LeadForm, InteractionForm
 import csv
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 @login_required
 def dashboard(request):
@@ -180,4 +181,14 @@ def export_interactions_csv(request, lead_id):
         writer.writerow(interacao)
 
     return response
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})
 

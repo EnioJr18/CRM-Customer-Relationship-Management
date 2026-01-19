@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
-![Status](https://img.shields.io/badge/Development%2520Status-Active-green)
+![Status](https://img.shields.io/badge/Development%2520Status-Active-green?style=for-the-badge&logo=github&label=Status)
 
 Sistema de Gestão de Relacionamento com Clientes (CRM) desenvolvido com **Django**. Focado em produtividade, organização de leads e acompanhamento de métricas de vendas. O projeto oferece uma interface elegante (Dark Mode) e isolamento de dados por usuário, funcionando como um SaaS (Software as a Service).
 

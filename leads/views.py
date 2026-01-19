@@ -88,8 +88,7 @@ class LeadUpdateView(LoginRequiredMixin, generic.UpdateView):
         messages.success(self.request, "Lead atualizado!")
         return reverse("leads:lead_list")
 
-class LeadDeleteView(LoginRequiredMixin, generic.DeleteView):
-    template_name = "leads/lead_list.html" 
+class LeadDeleteView(LoginRequiredMixin, generic.DeleteView): 
     
     def get_queryset(self):
         return Lead.objects.filter(agente_responsavel=self.request.user)
